@@ -82,7 +82,7 @@ public class MCEFApiImpl implements MCEFApi {
             future = CompletableFuture.supplyAsync(() -> {
                 try {
                     return new MCEFApiImpl(this);
-                } catch (Exception e) {
+                } catch (Throwable e) {
                     MCEFModern.LOGGER.error("Failed to initialize MCEF Modern", e);
                     stage = Stage.DONE;
                     percentage = -1;

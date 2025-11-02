@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "mcef-modern",
+  "version": "${version}",
+  "name": "MCEF Modern",
+  "description": "Minecraft Chromium Embedded Framework — mod and library for adding Chromium web browser into Minecraft",
+  "authors": [
+    "DimasKama"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/project/mcef-modern",
+    "sources": "https://github.com/DimasKama/mcef-modern",
+    "issues": "https://github.com/DimasKama/mcef-modern/issues"
+  },
+  "license": "LGPL-2.1",
+  "icon": "assets/mcef-modern/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "net.dimaskama.mcef.impl.MCEFModern"
+    ],
+    "modmenu": [
+      "net.dimaskama.mcef.impl.compat.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "mcef-modern.mixins.json"
+  ],
+  "depends": {
+    "minecraft": ">=${minecraft_version}",
+    "fabric-api": ">=${fabric_version}"
+  }
+}

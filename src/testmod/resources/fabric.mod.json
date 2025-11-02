@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "mcef-modern-testmod",
+  "version": "0.0.1",
+  "name": "MCEF Modern Test Mod",
+  "authors": [
+    "DimasKama"
+  ],
+  "license": "LGPL-2.1",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "net.dimaskama.mcef.testmod.MCEFTestMod"
+    ],
+    "modmenu": [
+      "net.dimaskama.mcef.testmod.MCEFTestModModMenuCompat"
+    ]
+  }
+}

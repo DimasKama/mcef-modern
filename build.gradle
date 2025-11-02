@@ -110,9 +110,16 @@ publishing {
 
     // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
     repositories {
-        maven {
-            name "dimaskama"
-            url "https://maven.dimaskama.net"
+        String mavenToken = System.getenv("MAVEN_TOKEN")
+        if (mavenToken) {
+            maven {
+                name "dimaskama"
+                url "https://maven.dimaskama.net/releases"
+                credentials {
+                    username 'main-write'
+                    password mavenToken
+                }
+            }
         }
     }
 }

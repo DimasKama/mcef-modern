@@ -28,7 +28,7 @@ public class MCEFTestModScreen extends Screen {
     protected void init() {
         if (browser == null) {
             browser = MCEFApi.getInstance().createBrowser(
-                    "https://youtu.be/nsWBsBAR3AY",
+                    "https://youtu.be/dQw4w9WgXcQ",
                     false
             );
         }

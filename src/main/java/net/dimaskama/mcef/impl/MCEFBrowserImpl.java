@@ -51,16 +51,16 @@ public class MCEFBrowserImpl extends CustomCefBrowserOsr implements MCEFBrowser 
     }
 
     @Override
-    public void onMouseClicked(MouseButtonEvent event, boolean doubled) {
-        int btn = toAwtMouseButton(event.button());
+    public void onMouseClicked(int x, int y, int button, int modifiers, boolean doubled) {
+        int btn = toAwtMouseButton(button);
         lastPressedMouseButton = btn;
         sendMouseEvent(new MouseEvent(
                 component,
                 MouseEvent.MOUSE_PRESSED,
                 System.currentTimeMillis(),
-                toAwtInputModifiers(event.modifiers()),
-                (int) event.x(),
-                (int) event.y(),
+                toAwtInputModifiers(modifiers),
+                x,
+                y,
                 doubled ? 2 : 1,
                 false,
                 btn
@@ -68,8 +68,8 @@ public class MCEFBrowserImpl extends CustomCefBrowserOsr implements MCEFBrowser 
     }
 
     @Override
-    public void onMouseReleased(MouseButtonEvent event) {
-        int btn = toAwtMouseButton(event.button());
+    public void onMouseReleased(int x, int y, int button, int modifiers) {
+        int btn = toAwtMouseButton(button);
         if (btn == lastPressedMouseButton) {
             lastPressedMouseButton = MouseEvent.NOBUTTON;
         }
@@ -77,9 +77,9 @@ public class MCEFBrowserImpl extends CustomCefBrowserOsr implements MCEFBrowser 
                 component,
                 MouseEvent.MOUSE_RELEASED,
                 System.currentTimeMillis(),
-                toAwtInputModifiers(event.modifiers()),
-                (int) event.x(),
-                (int) event.y(),
+                toAwtInputModifiers(modifiers),
+                x,
+                y,
                 1,
                 false,
                 btn
@@ -414,5 +414,4 @@ public class MCEFBrowserImpl extends CustomCefBrowserOsr implements MCEFBrowser 
         this.cursorType = cursorType;
         return super.onCursorChange(browser, cursorType);
     }
-
 }

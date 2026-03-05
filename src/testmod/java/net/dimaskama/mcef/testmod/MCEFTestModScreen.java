@@ -1,5 +1,7 @@
 package net.dimaskama.mcef.testmod;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.textures.FilterMode;
 import com.mojang.blaze3d.textures.GpuTextureView;
 import net.dimaskama.mcef.api.MCEFApi;
 import net.dimaskama.mcef.api.MCEFBrowser;
@@ -12,6 +14,7 @@ import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 import org.joml.Matrix3x2f;
 
 public class MCEFTestModScreen extends Screen {
@@ -32,17 +35,20 @@ public class MCEFTestModScreen extends Screen {
                     false
             );
         }
-        browser.resize(width, height);
+        // Resize using raw width height
+        browser.resize(minecraft.getWindow().getWidth(), minecraft.getWindow().getHeight());
         browser.setFocus(true);
     }
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         GpuTextureView gpuTextureView = browser.getTextureView();
+
         if (gpuTextureView != null) {
+            // Render using scaled width, height
             guiGraphics.guiRenderState.submitGuiElement(new BlitRenderState(
                     RenderPipelines.GUI_TEXTURED,
-                    TextureSetup.singleTexture(gpuTextureView),
+                    TextureSetup.singleTexture(gpuTextureView, RenderSystem.getSamplerCache().getRepeat(FilterMode.LINEAR)),
                     new Matrix3x2f(guiGraphics.pose()),
                     0,
                     0,
@@ -74,13 +80,15 @@ public class MCEFTestModScreen extends Screen {
 
     @Override
     public boolean mouseClicked(MouseButtonEvent event, boolean doubled) {
-        browser.onMouseClicked(event, doubled);
+        final int guiScale = minecraft.getWindow().getGuiScale();
+        browser.onMouseClicked(Mth.floor(event.x() * (double) guiScale), Mth.floor(event.y() * (double) guiScale), event.button(), event.modifiers(), doubled);
         return super.mouseClicked(event, doubled);
     }
 
     @Override
     public boolean mouseReleased(MouseButtonEvent event) {
-        browser.onMouseReleased(event);
+        final int guiScale = minecraft.getWindow().getGuiScale();
+        browser.onMouseReleased(Mth.floor(event.x() * (double) guiScale), Mth.floor(event.y() * (double) guiScale), event.button(), event.modifiers());
         return super.mouseReleased(event);
     }
 
@@ -92,7 +100,8 @@ public class MCEFTestModScreen extends Screen {
 
     @Override
     public void mouseMoved(double x, double y) {
-        browser.onMouseMoved((int) x, (int) y);
+        final int guiScale = minecraft.getWindow().getGuiScale();
+        browser.onMouseMoved(Mth.floor(x * (double) guiScale), Mth.floor(y * (double) guiScale));
         super.mouseMoved(x, y);
     }
 
@@ -113,5 +122,4 @@ public class MCEFTestModScreen extends Screen {
         browser.onCharTyped(event);
         return super.charTyped(event);
     }
-
 }

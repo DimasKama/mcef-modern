@@ -37,17 +37,23 @@ public interface MCEFBrowser extends AutoCloseable {
     /**
      * Handles a mouse click event.
      *
-     * @param event   the mouse button event
-     * @param doubled {@code true} if this is a double-click event
+     * @param x         raw mouse position x
+     * @param y         raw mouse position y
+     * @param button    mouse button
+     * @param modifiers input modifiers
+     * @param doubled   {@code true} if this is a double-click event
      */
-    void onMouseClicked(MouseButtonEvent event, boolean doubled);
+    void onMouseClicked(int x, int y, int button, int modifiers, boolean doubled);
 
     /**
      * Handles a mouse button release event.
      *
-     * @param event the mouse button event
+     * @param x         raw mouse position x
+     * @param y         raw mouse position y
+     * @param button    mouse button
+     * @param modifiers input modifiers
      */
-    void onMouseReleased(MouseButtonEvent event);
+    void onMouseReleased(int x, int y, int button, int modifiers);
 
     /**
      * Handles mouse scroll (wheel) events.

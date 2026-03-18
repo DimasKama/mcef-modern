@@ -1,5 +1,7 @@
 package net.dimaskama.mcef.testmod;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.textures.FilterMode;
 import com.mojang.blaze3d.textures.GpuTextureView;
 import net.dimaskama.mcef.api.MCEFApi;
 import net.dimaskama.mcef.api.MCEFBrowser;
@@ -42,7 +44,7 @@ public class MCEFTestModScreen extends Screen {
         if (gpuTextureView != null) {
             guiGraphics.guiRenderState.submitGuiElement(new BlitRenderState(
                     RenderPipelines.GUI_TEXTURED,
-                    TextureSetup.singleTexture(gpuTextureView),
+                    TextureSetup.singleTexture(gpuTextureView, RenderSystem.getSamplerCache().getClampToEdge(FilterMode.LINEAR)),
                     new Matrix3x2f(guiGraphics.pose()),
                     0,
                     0,

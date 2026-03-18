@@ -1,1 +1,2 @@
-- Fix jcef-api was not included to the mod
+- Update JCEF version to 143.0.14
+- Fix extra mod menu dependency

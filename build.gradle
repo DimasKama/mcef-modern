@@ -57,7 +57,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
 
     // Mod Menu
-    modImplementation "com.terraformersmc:modmenu:${modmenu_version}"
+    testmodImplementation "com.terraformersmc:modmenu:${modmenu_version}"
 
     // JCEF API
     include(modImplementation("me.friwi:jcef-api:${jcef_api_version}"))

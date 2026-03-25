@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version "${loom_version}"
+    id 'net.fabricmc.fabric-loom' version "${loom_version}"
     id 'maven-publish'
     id "com.modrinth.minotaur" version "2.+"
 }
@@ -50,20 +50,20 @@ repositories {
 dependencies {
     // Fabric Loader
     minecraft "com.mojang:minecraft:${minecraft_version}"
-    mappings loom.officialMojangMappings()
-    modImplementation "net.fabricmc:fabric-loader:${loader_version}"
+
+    implementation "net.fabricmc:fabric-loader:${loader_version}"
 
     // Fabric API
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
 
     // Mod Menu
     testmodImplementation "com.terraformersmc:modmenu:${modmenu_version}"
 
     // JCEF API
-    include(modImplementation("me.friwi:jcef-api:${jcef_api_version}"))
+    include(implementation("me.friwi:jcef-api:${jcef_api_version}"))
 
     // JCEF Maven
-    include(modImplementation("me.friwi:jcefmaven:${jcef_version}"))
+    include(implementation("me.friwi:jcefmaven:${jcef_version}"))
 
     testmodImplementation sourceSets.main.output
     testmodAnnotationProcessor sourceSets.main.output
@@ -82,7 +82,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    it.options.release = 21
+    it.options.release = 25
 }
 
 java {
@@ -91,8 +91,8 @@ java {
     // If you remove this line, sources will not be generated.
     withSourcesJar()
 
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
 
 jar {

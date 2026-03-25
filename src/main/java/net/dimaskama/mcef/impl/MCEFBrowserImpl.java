@@ -166,7 +166,7 @@ public class MCEFBrowserImpl extends CustomCefBrowserOsr implements MCEFBrowser 
                 component,
                 KeyEvent.KEY_TYPED,
                 System.currentTimeMillis(),
-                toAwtInputModifiers(event.modifiers()),
+                0,
                 KeyEvent.VK_UNDEFINED,
                 (char) event.codepoint()
         ));

@@ -5,14 +5,14 @@ import com.mojang.blaze3d.textures.FilterMode;
 import com.mojang.blaze3d.textures.GpuTextureView;
 import net.dimaskama.mcef.api.MCEFApi;
 import net.dimaskama.mcef.api.MCEFBrowser;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.render.TextureSetup;
-import net.minecraft.client.gui.render.state.BlitRenderState;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.CharacterEvent;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.state.gui.BlitRenderState;
 import net.minecraft.network.chat.Component;
 import org.joml.Matrix3x2f;
 
@@ -39,10 +39,10 @@ public class MCEFTestModScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         GpuTextureView gpuTextureView = browser.getTextureView();
         if (gpuTextureView != null) {
-            guiGraphics.guiRenderState.submitGuiElement(new BlitRenderState(
+            guiGraphics.guiRenderState.addGuiElement(new BlitRenderState(
                     RenderPipelines.GUI_TEXTURED,
                     TextureSetup.singleTexture(gpuTextureView, RenderSystem.getSamplerCache().getClampToEdge(FilterMode.LINEAR)),
                     new Matrix3x2f(guiGraphics.pose()),

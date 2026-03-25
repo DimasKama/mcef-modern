@@ -1,2 +1,1 @@
-- Update JCEF version to 143.0.14
-- Fix extra mod menu dependency
+- Update to MC 26.1

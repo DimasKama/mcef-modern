@@ -11,9 +11,9 @@
   "entrypoints": {
     "client": [
       "net.dimaskama.mcef.testmod.MCEFTestMod"
-    ],
-    "modmenu": [
-      "net.dimaskama.mcef.testmod.MCEFTestModModMenuCompat"
     ]
-  }
+  },
+  "mixins": [
+    "mcef-modern-testmod.mixins.json"
+  ]
 }

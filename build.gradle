@@ -42,9 +42,6 @@ loom {
 }
 
 repositories {
-    maven {
-        url "https://maven.terraformersmc.com/releases/"
-    }
 }
 
 dependencies {
@@ -55,9 +52,6 @@ dependencies {
 
     // Fabric API
     implementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
-
-    // Mod Menu
-    testmodImplementation "com.terraformersmc:modmenu:${modmenu_version}"
 
     // JCEF API
     include(implementation("me.friwi:jcef-api:${jcef_api_version}"))

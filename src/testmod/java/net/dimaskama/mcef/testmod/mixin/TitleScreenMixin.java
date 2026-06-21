@@ -20,7 +20,7 @@ abstract class TitleScreenMixin extends Screen {
     @Inject(method = "init", at = @At("TAIL"))
     private void initTail(CallbackInfo ci) {
         addRenderableWidget(Button.builder(Component.literal("MCEF Test"), narratorButton ->
-                        minecraft.setScreen(new MCEFTestModScreen(null)))
+                        minecraft.gui.setScreen(new MCEFTestModScreen(null)))
                 .bounds(width - 120, height / 2 - 10, 100, 20)
                 .build());
     }

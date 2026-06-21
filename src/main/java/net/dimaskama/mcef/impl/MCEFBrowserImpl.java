@@ -1,5 +1,6 @@
 package net.dimaskama.mcef.impl;
 
+import com.mojang.blaze3d.GpuFormat;
 import com.mojang.blaze3d.opengl.GlConst;
 import com.mojang.blaze3d.opengl.GlStateManager;
 import com.mojang.blaze3d.opengl.GlTexture;
@@ -8,7 +9,6 @@ import com.mojang.blaze3d.platform.cursor.CursorTypes;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.textures.GpuTexture;
 import com.mojang.blaze3d.textures.GpuTextureView;
-import com.mojang.blaze3d.textures.TextureFormat;
 import net.dimaskama.mcef.api.MCEFBrowser;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.input.CharacterEvent;
@@ -380,7 +380,7 @@ public class MCEFBrowserImpl extends CustomCefBrowserOsr implements MCEFBrowser 
                                 | GpuTexture.USAGE_COPY_SRC
                                 | GpuTexture.USAGE_TEXTURE_BINDING
                                 | GpuTexture.USAGE_RENDER_ATTACHMENT,
-                        TextureFormat.RGBA8,
+                        GpuFormat.RGBA8_UNORM,
                         width,
                         height,
                         1,

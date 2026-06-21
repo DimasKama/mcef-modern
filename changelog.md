@@ -1,2 +1,1 @@
-- Update JCEF version to 146.0.10
-- Fix testmod
+- Update to MC 26.2

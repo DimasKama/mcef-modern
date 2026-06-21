@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "net.dimaskama.mcef.testmod.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+  ],
+  "client": [
+    "TitleScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

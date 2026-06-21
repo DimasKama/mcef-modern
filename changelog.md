@@ -1,2 +1,2 @@
-- Update JCEF version to 143.0.14
-- Fix extra mod menu dependency
+- Update JCEF version to 146.0.10
+- Fix testmod

@@ -134,29 +134,47 @@ public class MCEFBrowserImpl extends CustomCefBrowserOsr implements MCEFBrowser 
         ));
     }
 
+    /**
+     * Returns the typed character for control keys that do not trigger {@link #onCharTyped},
+     * or {@link KeyEvent#CHAR_UNDEFINED} for all other keys.
+     */
+    private static char getControlKeyChar(int glfwKey) {
+        return switch (glfwKey) {
+            case GLFW.GLFW_KEY_BACKSPACE                       -> '\b';
+            case GLFW.GLFW_KEY_ENTER, GLFW.GLFW_KEY_KP_ENTER  -> '\n';
+            case GLFW.GLFW_KEY_TAB                             -> '\t';
+            case GLFW.GLFW_KEY_DELETE                          -> (char) 127;
+            default                                            -> KeyEvent.CHAR_UNDEFINED;
+        };
+    }
+
     @Override
     public void onKeyPressed(net.minecraft.client.input.KeyEvent event) {
         int key = toAwtKeyCode(event.key());
-        sendKeyEvent(new KeyEvent(
-                component,
-                KeyEvent.KEY_PRESSED,
-                System.currentTimeMillis(),
-                toAwtInputModifiers(event.modifiers()),
-                key,
-                (char) key
-        ));
+        int modifiers = toAwtInputModifiers(event.modifiers());
+        long time = System.currentTimeMillis();
+
+        // KEY_PRESSED keyChar must be CHAR_UNDEFINED per AWT spec.
+        sendKeyEvent(new KeyEvent(component, KeyEvent.KEY_PRESSED, time, modifiers, key, KeyEvent.CHAR_UNDEFINED));
+
+        // Control keys don't trigger onCharTyped, so KEY_TYPED must be sent here.
+        char keyChar = getControlKeyChar(event.key());
+        if (keyChar != KeyEvent.CHAR_UNDEFINED) {
+            sendKeyEvent(new KeyEvent(component, KeyEvent.KEY_TYPED, time, modifiers, KeyEvent.VK_UNDEFINED, keyChar));
+        }
     }
 
     @Override
     public void onKeyReleased(net.minecraft.client.input.KeyEvent event) {
         int key = toAwtKeyCode(event.key());
+        // KEY_RELEASED keyChar must be CHAR_UNDEFINED per AWT spec.
         sendKeyEvent(new KeyEvent(
                 component,
                 KeyEvent.KEY_RELEASED,
                 System.currentTimeMillis(),
                 toAwtInputModifiers(event.modifiers()),
                 key,
-                (char) key
+                KeyEvent.CHAR_UNDEFINED
         ));
     }
 

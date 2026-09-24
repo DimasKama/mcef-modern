@@ -1,1 +1,2 @@
-- Update to MC 26.2
+- Update to MC 26.3
+- Support Vulkan graphics API
